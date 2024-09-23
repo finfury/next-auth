@@ -1,7 +1,5 @@
 .base {
 	max-height: inherit;
-	fill: red;
-	stroke: #25D366;
 }
 
 .link {
@@ -10,7 +8,13 @@
 }
 
 .phone {
-	
+}
+
+.eye {
+}
+
+.person {
+	stroke: none;
 }
 
 .vk {
@@ -18,12 +22,12 @@
 
 	@media (hover: hover) {
 		&:hover {
-			fill: #0077FF;
+			fill: #0077ff;
 		}
 	}
 
 	@media (hover: none) {
-		fill: #0077FF;
+		fill: #0077ff;
 	}
 }
 
@@ -52,10 +56,10 @@
 .whatsApp {
 	@media (hover: hover) {
 		&:hover {
-			fill: #25D366;
+			fill: #25d366;
 		}
 	}
 	@media (hover: none) {
-		fill: #25D366;
+		fill: #25d366;
 	}
 }

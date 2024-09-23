@@ -122,11 +122,20 @@ input[type='submit'] {
 	cursor: pointer;
 }
 
+img,
+img:focus,
+img:focus-visible,
+a,
+a:focus,
+a:focus-visible,
 input:focus,
 input:active,
+input:focus-visible,
 textarea:focus,
 textarea:active,
+textarea:focus-visible,
 button:focus,
+button:focus-visible,
 button:active {
 	outline: none;
 }
