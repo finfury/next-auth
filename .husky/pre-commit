@@ -1,2 +1,2 @@
 # Запуск скриптов
-yarn lint && yarn format
+yarn pretty
