@@ -1,0 +1,44 @@
+@import 'null';
+@import 'colors';
+@import 'variables';
+@import 'fonts';
+
+*::selection {
+	background-color: var(--black); /* Цвет фона */
+	color: var(--white); /* Цвет текста */
+}
+
+body {
+	background: var(--white);
+	color: var(--black);
+	font-family: 'Rubic', sans-serif;
+
+	scrollbar-width: auto; /* Ширина полосы прокрутки */
+	scrollbar-color: var(--white) var(--black);
+	-ms-overflow-style: -ms-autohiding-scrollbar;
+
+	::-webkit-scrollbar {
+		width: 12px; /* Ширина полосы прокрутки */
+		height: 12px; /* Высота горизонтальной полосы прокрутки */
+	}
+
+	::-webkit-scrollbar-track {
+		background: var(--black); /* Цвет фона трека */
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: var(--white); /* Цвет бегунка */
+		//border-radius: 10px; /* Закругленные углы бегунка */
+	}
+}
+
+.container {
+	display: block;
+	max-width: $max-width + px;
+	margin: 0 auto;
+	padding: 0 40px;
+
+	@media (max-width: $three + 'px') {
+		padding: 0 20px;
+	}
+}
