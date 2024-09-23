@@ -1,12 +1,13 @@
 import Image from 'next/image'
-import Img from '@/images/favicon.ico'
-
+import Img from '@/images/next.svg'
 
 export default function Home() {
 	return (
 		<div>
 			<h1>Home page</h1>
-			<Image src={Img} alt='' />
+			<svg>
+				<use href={`/images/sprite.svg#icon-telegram`} />
+			</svg>
 		</div>
 	)
 }
