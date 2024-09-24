@@ -1,27 +1,29 @@
-import {ComponentPropsWithRef} from 'react'
+import { ComponentPropsWithRef } from 'react'
 import clsx from 'clsx'
 import styles from './Icon.module.scss'
 
 interface IProps extends ComponentPropsWithRef<'svg'> {
 	id:
-		| 'mail'
-		| 'arrow'
-		| 'book'
-		| 'grade'
-		| 'location'
-		| 'person'
-		| 'phone'
-		| 'check'
-		| 'telegram'
-		| 'whatsApp'
-		| 'vk'
-		| 'viber'
-		| 'eye'
+	| 'mail'
+	| 'arrow'
+	| 'book'
+	| 'grade'
+	| 'location'
+	| 'person'
+	| 'phone'
+	| 'check'
+	| 'telegram'
+	| 'whatsApp'
+	| 'vk'
+	| 'viber'
+	| 'eye'
+	| 'moon'
+	| 'sun'
 	link?: string
 	linkClassName?: string
 }
 
-function Icon({id, className, link, linkClassName, ...props}: IProps) {
+function Icon({ id, className, link, linkClassName, ...props }: IProps) {
 	const path = '/images/sprite.svg#icon-'
 	if (link) {
 		return (

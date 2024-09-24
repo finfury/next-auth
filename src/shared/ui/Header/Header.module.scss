@@ -319,11 +319,11 @@
 }
 
 .headerButton {
-	background-color:  rgba(0, 63, 37, 1);
+	background-color: rgba(0, 63, 37, 1);
 
 	@media (hover: hover) {
 		transition: all 0.3s ease;
-	
+
 		&:hover {
 			background-color: rgba(0, 144, 101, 1);
 		}

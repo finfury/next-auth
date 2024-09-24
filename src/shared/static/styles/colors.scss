@@ -11,3 +11,17 @@
 	--black-50: rgba(27, 27, 27, 0.5);
 	--black-75: rgba(27, 27, 27, 0.75);
 }
+
+[data-theme="light"] {
+	--error: #b55c5c;
+
+	--white: #000000;
+	--white-20: rgba(0, 0, 0, 0.2);
+	--white-50: rgba(255, 255, 255, 0.5);
+	--white-75: rgba(255, 225, 255, 0.75);
+
+	--black: #ffffff;
+	--black-20: rgba(255, 255, 255, 0.2);
+	--black-50: rgba(255, 255, 255, 0.5);
+	--black-75: rgba(255, 255, 255, 0.75);
+}
