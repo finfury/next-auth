@@ -38,7 +38,9 @@ interface InfiniteQuerySettings<Func = unknown> {
 
 type BaseUrl = string
 type RequestMethod = RequestInit['method']
-interface HttpClientSearchParams { [key: string]: string | number | boolean | string[] }
+interface HttpClientSearchParams {
+	[key: string]: string | number | boolean | string[]
+}
 
 type _RequestConfig = RequestInit & {
 	url: string
@@ -57,7 +59,7 @@ interface InterceptorResponseResult {
 type SuccessResponseFun = (res: InterceptorResponseResult) => InterceptorResponseResult['data']
 type SuccessRequestFun = (options: _RequestConfig) => _RequestConfig | Promise<_RequestConfig>
 
-type ResponseError = Error & { config: _RequestConfig; response: InterceptorResponseResult }
+type ResponseError = Error & {config: _RequestConfig; response: InterceptorResponseResult}
 type FailureResponseFun = (e: ResponseError) => any
 type FailureRequestFun = (e: ResponseError) => any
 
@@ -83,8 +85,8 @@ interface RequestOptions extends Omit<RequestInit, 'method'> {
 }
 
 type RequestConfig<Params = undefined> = Params extends undefined
-	? { config?: RequestOptions }
-	: { params: Params; config?: RequestOptions }
+	? {config?: RequestOptions}
+	: {params: Params; config?: RequestOptions}
 
 interface BaseResponse {
 	message: string

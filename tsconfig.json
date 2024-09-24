@@ -24,6 +24,7 @@
         "paths": {
             "@/*": ["./src/*"],
             "@/styles/*": ["./src/shared/static/styles/*"],
+            "@/contexts/*": ["./src/utils/contexts/*"],
             "@/images/*": ["./public/images/*"],
         }
     },
