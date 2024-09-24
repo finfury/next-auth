@@ -1,4 +1,6 @@
-interface HttpClientSearchParams { [key: string]: string | number | boolean | string[] }
+interface HttpClientSearchParams {
+	[key: string]: string | number | boolean | string[]
+}
 
 interface HttpClientParams {
 	baseURL: BaseUrl
@@ -14,41 +16,47 @@ export class HttpClient {
 
 	readonly interceptors: {
 		request: {
-			use: (onSuccess?: SuccessRequestFun, onFailure?: FailureRequestFun) => RequestInterceptor
+			use: (
+				onSuccess?: SuccessRequestFun,
+				onFailure?: FailureRequestFun
+			) => RequestInterceptor
 			eject: (interceptor: RequestInterceptor) => void
 		}
 		response: {
-			use: (onSuccess?: SuccessResponseFun, onFailure?: FailureResponseFun) => ResponseInterceptor
+			use: (
+				onSuccess?: SuccessResponseFun,
+				onFailure?: FailureResponseFun
+			) => ResponseInterceptor
 			eject: (interceptor: ResponseInterceptor) => void
 		}
 	}
 
-	constructor({ baseURL, headers = {} }: HttpClientParams) {
+	constructor({baseURL, headers = {}}: HttpClientParams) {
 		this.baseURL = baseURL
 		this.headers = headers
-		this.interceptorHandlers = { request: [], response: [] }
+		this.interceptorHandlers = {request: [], response: []}
 		this.interceptors = {
 			request: {
 				use: (onSuccess, onFailure) => {
-					const interceptor = { onSuccess, onFailure }
+					const interceptor = {onSuccess, onFailure}
 					this.interceptorHandlers.request?.push(interceptor)
 					return interceptor
 				},
-				eject: (interceptor) => {
+				eject: interceptor => {
 					this.interceptorHandlers.request = this.interceptorHandlers.request?.filter(
-						(interceptorLink) => interceptorLink !== interceptor
+						interceptorLink => interceptorLink !== interceptor
 					)
 				}
 			},
 			response: {
 				use: (onSuccess, onFailure) => {
-					const interceptor = { onSuccess, onFailure }
+					const interceptor = {onSuccess, onFailure}
 					this.interceptorHandlers.response?.push(interceptor)
 					return interceptor
 				},
-				eject: (interceptor) => {
+				eject: interceptor => {
 					this.interceptorHandlers.response = this.interceptorHandlers.response?.filter(
-						(interceptorLink) => interceptorLink !== interceptor
+						interceptorLink => interceptorLink !== interceptor
 					)
 				}
 			}
@@ -56,7 +64,7 @@ export class HttpClient {
 	}
 
 	setHeaders(headers: Record<string, string>) {
-		this.headers = { ...this.headers, ...headers }
+		this.headers = {...this.headers, ...headers}
 	}
 
 	private createSearchParams(params: HttpClientSearchParams) {
@@ -67,7 +75,7 @@ export class HttpClient {
 				const value = params[key]
 
 				if (Array.isArray(value)) {
-					value.forEach((currentValue) => searchParams.append(key, currentValue))
+					value.forEach(currentValue => searchParams.append(key, currentValue))
 				} else {
 					searchParams.set(key, value.toString())
 				}
@@ -91,11 +99,11 @@ export class HttpClient {
 			data: body
 		}
 
-		this.interceptorHandlers.response?.forEach(({ onSuccess, onFailure }) => {
+		this.interceptorHandlers.response?.forEach(({onSuccess, onFailure}) => {
 			try {
 				if (!initialResponse.ok)
 					throw new Error(initialResponse.statusText, {
-						cause: { config: initialConfig, response }
+						cause: {config: initialConfig, response}
 					})
 				if (!onSuccess) return
 				body = onSuccess(response)
@@ -116,7 +124,7 @@ export class HttpClient {
 
 		if (!this.interceptorHandlers.request?.length) return config
 
-		for (const { onSuccess, onFailure } of this.interceptorHandlers.request) {
+		for (const {onSuccess, onFailure} of this.interceptorHandlers.request) {
 			try {
 				if (!onSuccess) continue
 				config = await onSuccess(config)
@@ -139,7 +147,11 @@ export class HttpClient {
 		}
 	}
 
-	private async request<T>(endpoint: string, method: RequestMethod, options: RequestOptions = {}) {
+	private async request<T>(
+		endpoint: string,
+		method: RequestMethod,
+		options: RequestOptions = {}
+	) {
 		console.info('REQUEST:', method, endpoint, new Date())
 
 		const defaultConfig: _RequestConfig = {
@@ -150,8 +162,8 @@ export class HttpClient {
 				...this.headers,
 				...(options?.body &&
 					!(options.body instanceof FormData) && {
-					'content-type': 'application/json'
-				}),
+						'content-type': 'application/json'
+					}),
 				...(!!options?.headers && options.headers)
 			}
 		}
@@ -176,7 +188,7 @@ export class HttpClient {
 				success: response.ok,
 				data: body
 			}
-			throw new Error(response.statusText, { cause: error })
+			throw new Error(response.statusText, {cause: error})
 		}
 
 		if (!this.interceptorHandlers.response?.length && response.ok) {
@@ -198,21 +210,21 @@ export class HttpClient {
 	post<T>(endpoint: string, body?: RequestBody, options: RequestOptions = {}) {
 		return this.request<T>(endpoint, 'POST', {
 			...options,
-			...(!!body && { body: body instanceof FormData ? body : JSON.stringify(body) })
+			...(!!body && {body: body instanceof FormData ? body : JSON.stringify(body)})
 		})
 	}
 
 	put<T>(endpoint: string, body?: RequestBody, options: RequestOptions = {}) {
 		return this.request<T>(endpoint, 'PUT', {
 			...options,
-			...(!!body && { body: body instanceof FormData ? body : JSON.stringify(body) })
+			...(!!body && {body: body instanceof FormData ? body : JSON.stringify(body)})
 		})
 	}
 
 	patch<T>(endpoint: string, body?: RequestBody, options: RequestOptions = {}) {
 		return this.request<T>(endpoint, 'PATCH', {
 			...options,
-			...(!!body && { body: body instanceof FormData ? body : JSON.stringify(body) })
+			...(!!body && {body: body instanceof FormData ? body : JSON.stringify(body)})
 		})
 	}
 

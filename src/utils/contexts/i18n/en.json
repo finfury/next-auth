@@ -1,0 +1,9 @@
+{
+	"title": "Title",
+	"reg_title": "Rigistration",
+	"reg_action_registration": "Register",
+	"reg_note": "Already have an account? ",
+	"reg_note_link": "Log in!",
+	"input_login_label": "Login",
+	"input_password_label": "Password"
+}

@@ -54,7 +54,8 @@ export default function Login() {
 
 			<div className={styles.note}>
 				<Link href={'/auth/reg'} className={styles.note__text}>
-					Еще нет аккаунта? <span className={styles.note__text_link}>Зарегистрироваться!</span>
+					Еще нет аккаунта?{' '}
+					<span className={styles.note__text_link}>Зарегистрироваться!</span>
 				</Link>
 			</div>
 		</div>
