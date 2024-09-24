@@ -9,13 +9,18 @@
 }
 
 body {
-	background: var(--white);
-	color: var(--black);
+	/* background-color: var(--white);
+	color: var(--black); */
 	font-family: 'Rubic', sans-serif;
 
 	scrollbar-width: auto; /* Ширина полосы прокрутки */
 	scrollbar-color: var(--white) var(--black);
 	-ms-overflow-style: -ms-autohiding-scrollbar;
+
+	&.dark {
+		background-color: var(--black);
+		color: var(--white);
+	}
 
 	::-webkit-scrollbar {
 		width: 12px; /* Ширина полосы прокрутки */
@@ -29,6 +34,16 @@ body {
 	::-webkit-scrollbar-thumb {
 		background: var(--white); /* Цвет бегунка */
 		//border-radius: 10px; /* Закругленные углы бегунка */
+	}
+
+	@media (prefers-color-scheme: dark) {
+		background-color: var(--black);
+		color: var(--white);
+	}
+
+	@media (prefers-color-scheme: light) {
+		background-color: var(--white);
+		color: var(--black);
 	}
 }
 
