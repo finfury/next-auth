@@ -1,22 +1,23 @@
 'use client'
 
-import React, { useContext } from 'react'
+import React, {useContext} from 'react'
 import Typography from '@mui/material/Typography/Typography'
 import TextField from '@mui/material/TextField/TextField'
-import Icon from '@/shared/ui/Icon/Icon'
+import Icon from '@/components/Icon/Icon'
 import styles from './page.module.scss'
 import Button from '@mui/material/Button/Button'
 import clsx from 'clsx'
 import Link from 'next/link'
-import { Auth } from '@/utils/api/instance'
-import { IRegRequest, IRegResponse } from '@/app/models/IReg'
-import { FormattedMessage } from 'react-intl'
-import { getI18n } from '@/utils/contexts/i18n/helpers/getI18n'
-import { I18nContext } from '@/utils/contexts/i18n/I18nProvider'
-
+import {Auth} from '@/utils/api/instance'
+import {IRegRequest, IRegResponse} from '@/app/models/IReg'
+import {FormattedMessage} from 'react-intl'
+import {getI18n} from '@/utils/contexts/i18n/helpers/getI18n'
+import {I18nContext} from '@/utils/contexts/i18n/I18nProvider'
+import {ThemeContext} from '@/utils/contexts/theme/ThemeProvider'
 
 export default function Registration() {
-	const { locale } = useContext(I18nContext)
+	const {locale} = useContext(I18nContext)
+	const {theme} = useContext(ThemeContext)
 	const i18n = getI18n(locale)
 	const [showPassword, setShowPassword] = React.useState<boolean>(false)
 
@@ -33,13 +34,12 @@ export default function Registration() {
 			alert('Неправильно введены данные!')
 			return
 		}
-		const bodyRequest: IRegRequest = { login: String(login), password: String(password) }
+
+		const bodyRequest: IRegRequest = {login: String(login), password: String(password)}
 
 		const response = await Auth.post<IRegResponse>('reg', bodyRequest)
 
 		if (response.success) {
-			console.log(response)
-			console.log(document.cookie)
 			alert('Success')
 		} else {
 			alert('Не получилось зарегистрировать пользователя')
@@ -54,17 +54,22 @@ export default function Registration() {
 
 			<div className={styles.form}>
 				<TextField
-					label={i18n.formatMessage({ id: 'input_login_label' })}
+					label={i18n.formatMessage({id: 'input_login_label'})}
 					variant='standard'
 					name='login'
 					slotProps={{
 						input: {
-							startAdornment: <Icon className={styles.startIcon} id='person' />
+							startAdornment: (
+								<Icon
+									className={clsx(styles.startIcon, styles[theme])}
+									id='person'
+								/>
+							)
 						}
 					}}
 				/>
 				<TextField
-					label={i18n.formatMessage({ id: 'input_password_label' })}
+					label={i18n.formatMessage({id: 'input_password_label'})}
 					variant='standard'
 					name='password'
 					type={showPassword ? 'text' : 'password'}
@@ -72,7 +77,11 @@ export default function Registration() {
 						input: {
 							startAdornment: (
 								<Icon
-									className={clsx(styles.startIcon, styles.password)}
+									className={clsx(
+										styles.startIcon,
+										styles.password,
+										styles[theme]
+									)}
 									id='eye'
 									onClick={handleClickShowPassword}
 								/>

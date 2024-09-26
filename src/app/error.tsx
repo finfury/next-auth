@@ -3,7 +3,7 @@
 export default function Error() {
 	return (
 		<div className={'home'}>
-			<h1>Error was</h1>
+			<h2>Error was</h2>
 		</div>
 	)
 }

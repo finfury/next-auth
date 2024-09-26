@@ -1,7 +1,6 @@
-import React, { createContext, useState } from 'react'
-import { IntlProvider } from 'react-intl'
-import { Messages } from './helpers/getMessagesByLocale'
-
+import React, {createContext, useState} from 'react'
+import {IntlProvider} from 'react-intl'
+import {Messages} from './helpers/getMessagesByLocale'
 
 export type Locale = 'ru' | 'en'
 
@@ -17,8 +16,10 @@ export interface I18nProviderProps extends I18nContext {
 
 export const I18nContext = createContext<I18nContext>({locale: 'ru', messages: {}, setLocale() {}})
 
-export const I18nProvider = ({ locale, messages, setLocale, ...props }: I18nProviderProps) => {
-	return <I18nContext.Provider value={{ locale, messages, setLocale }} >
-		<IntlProvider locale={locale} messages={messages} {...props} />
-	</I18nContext.Provider>
+export const I18nProvider = ({locale, messages, setLocale, ...props}: I18nProviderProps) => {
+	return (
+		<I18nContext.Provider value={{locale, messages, setLocale}}>
+			<IntlProvider locale={locale} messages={messages} {...props} />
+		</I18nContext.Provider>
+	)
 }

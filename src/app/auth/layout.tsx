@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './page.module.scss'
-import {LanguageButton} from '@/shared/ui/LanguageButton/LanguageButton'
+import {LanguageSwitcher} from '@/components/LanguageSwitcher/LanguageSwitcher'
+import {ThemeSwitcher} from '@/components/ThemeSwitcher/ThemeSwitcher'
 
 interface IProps {
 	children: React.ReactNode
@@ -9,7 +10,8 @@ interface IProps {
 export default function AuthorizationLayout({children}: IProps) {
 	return (
 		<div className={styles.authorization}>
-			<LanguageButton />
+			<LanguageSwitcher />
+			<ThemeSwitcher />
 			<div className={styles.authorization__body}>{children}</div>
 		</div>
 	)

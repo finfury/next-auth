@@ -23,7 +23,7 @@
         ],
         "paths": {
             "@/*": ["./src/*"],
-            "@/styles/*": ["./src/shared/static/styles/*"],
+            "@/styles/*": ["./src/shared/styles/*"],
             "@/contexts/*": ["./src/utils/contexts/*"],
             "@/images/*": ["./public/images/*"],
         }
