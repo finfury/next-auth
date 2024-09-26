@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './page.module.scss'
-import { LanguageButton } from '@/shared/ui/LanguageButton/LanguageButton'
+import {LanguageButton} from '@/shared/ui/LanguageButton/LanguageButton'
 
 interface IProps {
 	children: React.ReactNode

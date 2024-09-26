@@ -1,1 +1,1 @@
-Readme =)
+1. Можно получать текущую тему пользователя при помощи css свойства refers-color-scheme, Window.matchMedia()

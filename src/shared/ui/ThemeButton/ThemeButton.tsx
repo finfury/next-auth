@@ -5,8 +5,7 @@ import Icon from '../Icon/Icon'
 import styles from './ThemeButton.module.scss'
 
 export function ThemeButton() {
-	const handleClick = async () => {
-	}
+	const handleClick = async () => {}
 
 	return (
 		<Button className={styles.theme} onClick={handleClick}>

@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useContext } from 'react'
 import Typography from '@mui/material/Typography/Typography'
 import TextField from '@mui/material/TextField/TextField'
 import Icon from '@/shared/ui/Icon/Icon'
@@ -12,9 +12,12 @@ import { Auth } from '@/utils/api/instance'
 import { IRegRequest, IRegResponse } from '@/app/models/IReg'
 import { FormattedMessage } from 'react-intl'
 import { getI18n } from '@/utils/contexts/i18n/helpers/getI18n'
+import { I18nContext } from '@/utils/contexts/i18n/I18nProvider'
+
 
 export default function Registration() {
-	const i18n = getI18n('ru')
+	const { locale } = useContext(I18nContext)
+	const i18n = getI18n(locale)
 	const [showPassword, setShowPassword] = React.useState<boolean>(false)
 
 	const handleClickShowPassword = () => setShowPassword(show => !show)
