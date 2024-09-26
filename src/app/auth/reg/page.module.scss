@@ -29,6 +29,10 @@
 	&.password {
 		cursor: pointer;
 	}
+
+	&.dark {
+		fill: var(--black);
+	}
 }
 
 .actions {

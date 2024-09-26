@@ -2,13 +2,13 @@
 
 import Button from '@mui/material/Button/Button'
 import Icon from '../Icon/Icon'
-import styles from './LanguageButton.module.scss'
-import { useContext } from 'react'
-import { I18nContext } from '@/utils/contexts/i18n/I18nProvider'
-import { FormattedMessage } from 'react-intl'
+import styles from './LanguageSwitcher.module.scss'
+import {useContext} from 'react'
+import {I18nContext} from '@/utils/contexts/i18n/I18nProvider'
+import {FormattedMessage} from 'react-intl'
 
-export function LanguageButton() {
-	const { locale, setLocale } = useContext(I18nContext)
+export function LanguageSwitcher() {
+	const {locale, setLocale} = useContext(I18nContext)
 
 	const handleClick = async () => {
 		switch (locale) {

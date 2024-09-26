@@ -6,7 +6,7 @@ import Link from 'next/link'
 import Typography from '@mui/material/Typography/Typography'
 import TextField from '@mui/material/TextField/TextField'
 import Button from '@mui/material/Button/Button'
-import Icon from '@/shared/ui/Icon/Icon'
+import Icon from '@/components/Icon/Icon'
 import styles from './page.module.scss'
 
 export default function Login() {

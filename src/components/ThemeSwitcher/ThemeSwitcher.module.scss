@@ -5,7 +5,7 @@
 	align-items: center;
 	grid-gap: 20px;
 	right: 40px;
-	top: 40px;
+	top: 100px;
 	border-radius: 15px;
 	background-color: var(--black-50);
 	padding: 10px 20px;
@@ -19,4 +19,12 @@
 	fill: var(--black);
 	width: 40px;
 	height: 40px;
+
+	&.dark {
+		fill: var(--white);
+	}
+
+	&.light {
+		fill: var(--black);
+	}
 }
