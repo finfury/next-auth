@@ -11,6 +11,7 @@ export default function Profile() {
 			<div>
 				<h2>Protected Page</h2>
 				<p>You can view this page because you are signed in.</p>
+				<Link href={'/'}>Вернуться на главную</Link>
 			</div>
 		)
 	}
