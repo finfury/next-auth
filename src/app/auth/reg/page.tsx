@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useContext } from 'react'
+import React, {useContext} from 'react'
 import Typography from '@mui/material/Typography/Typography'
 import TextField from '@mui/material/TextField/TextField'
 import Icon from '@/components/Icon/Icon'
@@ -8,19 +8,19 @@ import styles from './page.module.scss'
 import Button from '@mui/material/Button/Button'
 import clsx from 'clsx'
 import Link from 'next/link'
-import { Auth } from '@/utils/api/instance'
-import { IRegRequest, IRegResponse } from '@/app/models/IReg'
-import { FormattedMessage } from 'react-intl'
-import { getI18n } from '@/utils/contexts/i18n/helpers/getI18n'
-import { I18nContext } from '@/utils/contexts/i18n/I18nProvider'
-import { ThemeContext } from '@/utils/contexts/theme/ThemeProvider'
+import {Auth} from '@/utils/api/instance'
+import {IRegRequest, IRegResponse} from '@/app/models/IReg'
+import {FormattedMessage} from 'react-intl'
+import {getI18n} from '@/utils/contexts/i18n/helpers/getI18n'
+import {I18nContext} from '@/utils/contexts/i18n/I18nProvider'
+import {ThemeContext} from '@/utils/contexts/theme/ThemeProvider'
 import AuthButton from '@/components/AuthButton/AuthButton'
-import { signIn } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import {signIn} from 'next-auth/react'
+import {useRouter} from 'next/navigation'
 
 export default function Registration() {
-	const { locale } = useContext(I18nContext)
-	const { theme } = useContext(ThemeContext)
+	const {locale} = useContext(I18nContext)
+	const {theme} = useContext(ThemeContext)
 	const i18n = getI18n(locale)
 	const [showPassword, setShowPassword] = React.useState<boolean>(false)
 	const router = useRouter()
@@ -44,12 +44,12 @@ export default function Registration() {
 			return
 		}
 
-		const response = await signIn('credentials', { email, password, redirect: false })
+		const response = await signIn('credentials', {email, password, redirect: false})
 
 		if (response && !response.error) {
 			alert('Успешная авторизация')
 			console.log(response)
-			router.push("/")
+			router.push('/')
 		} else {
 			alert('Что-то пошло не так')
 			console.log(response)
@@ -64,7 +64,7 @@ export default function Registration() {
 
 			<div className={styles.form}>
 				<TextField
-					label={i18n.formatMessage({ id: 'input_login_label' })}
+					label={i18n.formatMessage({id: 'input_login_label'})}
 					variant='standard'
 					name='email'
 					slotProps={{
@@ -79,7 +79,7 @@ export default function Registration() {
 					}}
 				/>
 				<TextField
-					label={i18n.formatMessage({ id: 'input_password_label' })}
+					label={i18n.formatMessage({id: 'input_password_label'})}
 					variant='standard'
 					name='password'
 					type={showPassword ? 'text' : 'password'}
@@ -102,9 +102,7 @@ export default function Registration() {
 			</div>
 
 			<div className={styles.actions}>
-				<Button className={styles.actionButton}
-					type='submit'
-					variant='contained'>
+				<Button className={styles.actionButton} type='submit' variant='contained'>
 					<FormattedMessage id='reg_action_registration' ignoreTag={true} />
 				</Button>
 				<AuthButton

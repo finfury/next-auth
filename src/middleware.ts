@@ -1,14 +1,15 @@
-import {NextResponse} from 'next/server'
-import type {NextRequest} from 'next/server'
-
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+export { default } from "next-auth/middleware"
 export const config = {
 	// Указание путей для срабатывания мидлварины
-	matcher: ['/', '/api/theme/']
+	matcher: ['/profile', '/api/theme/']
 }
 
 export function middleware(request: NextRequest) {
-	const regExp = /\/?theme\/?$/ // api/theme/
-	if (regExp.test(request.url)) {
+	const regExpTheme = /\/?theme\/?$/ // theme/
+
+	if (regExpTheme.test(request.url)) {
 		const themeCookieName = 'theme'
 		const response = NextResponse.next()
 		const cookie = request.cookies.get(themeCookieName)

@@ -13,7 +13,7 @@ interface IProps extends ExtendButtonBase<ButtonTypeMap<{}, 'button'>> {
 
 export default function AuthButton({provider, options, children, ...props}: IProps) {
 	const searchParams = useSearchParams()
-	const callbackUrl = searchParams.get('callbackUrl') || '/profile'
+	const callbackUrl = searchParams.get('callbackUrl') || '/'
 
 	return (
 		<Button onClick={() => signIn(provider, options ?? {callbackUrl})} {...props}>
