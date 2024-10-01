@@ -50,7 +50,7 @@ const Header = () => {
 										<Typography
 											component={'a'}
 											variant='h6'
-											href='/auth/reg'
+											href='/auth/login'
 											className={styles.navigation__link}
 											onClick={() => setActiveMenu(false)}>
 											Авторизация
