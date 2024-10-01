@@ -1,13 +1,13 @@
 'use client'
 
-import { clsx } from 'clsx'
-import { useState } from 'react'
+import {clsx} from 'clsx'
+import {useState} from 'react'
 import Image from 'next/image'
 import LogoImg from '@/images/next.svg'
 import Button from '@mui/material/Button'
 import styles from './Header.module.scss'
 import Typography from '@mui/material/Typography/Typography'
-import { signOut, useSession } from 'next-auth/react'
+import {signOut, useSession} from 'next-auth/react'
 
 const Header = () => {
 	const [activeMenu, setActiveMenu] = useState<boolean>(false)
@@ -63,7 +63,7 @@ const Header = () => {
 									variant={'contained'}
 									size={'large'}
 									className={styles.headerButton}
-									onClick={() => signOut({ callbackUrl: '/' })}>
+									onClick={() => signOut({callbackUrl: '/'})}>
 									Выйти
 								</Button>
 							)}
