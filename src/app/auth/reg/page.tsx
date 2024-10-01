@@ -15,12 +15,15 @@ import { getI18n } from '@/utils/contexts/i18n/helpers/getI18n'
 import { I18nContext } from '@/utils/contexts/i18n/I18nProvider'
 import { ThemeContext } from '@/utils/contexts/theme/ThemeProvider'
 import AuthButton from '@/components/AuthButton/AuthButton'
+import { signIn } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 export default function Registration() {
 	const { locale } = useContext(I18nContext)
 	const { theme } = useContext(ThemeContext)
 	const i18n = getI18n(locale)
 	const [showPassword, setShowPassword] = React.useState<boolean>(false)
+	const router = useRouter()
 
 	const handleClickShowPassword = () => setShowPassword(show => !show)
 
@@ -28,22 +31,28 @@ export default function Registration() {
 		event.preventDefault()
 
 		const formData = new FormData(event.currentTarget)
-		const login = formData.get('login')
+		const email = formData.get('email')
 		const password = formData.get('password')
 
-		if (login instanceof File && password instanceof File) {
+		if (email instanceof File && password instanceof File) {
 			alert('Неправильно введены данные!')
 			return
 		}
 
-		const bodyRequest: IRegRequest = { login: String(login), password: String(password) }
+		if (!email || !password || !email.toString().length || !password.toString().length) {
+			alert('Все поля должны быть заполнены!')
+			return
+		}
 
-		const response = await Auth.post<IRegResponse>('reg', bodyRequest)
+		const response = await signIn('credentials', { email, password, redirect: false })
 
-		if (response.success) {
-			alert('Success')
+		if (response && !response.error) {
+			alert('Успешная авторизация')
+			console.log(response)
+			router.push("/")
 		} else {
-			alert('Не получилось зарегистрировать пользователя')
+			alert('Что-то пошло не так')
+			console.log(response)
 		}
 	}
 
@@ -57,7 +66,7 @@ export default function Registration() {
 				<TextField
 					label={i18n.formatMessage({ id: 'input_login_label' })}
 					variant='standard'
-					name='login'
+					name='email'
 					slotProps={{
 						input: {
 							startAdornment: (
@@ -93,10 +102,16 @@ export default function Registration() {
 			</div>
 
 			<div className={styles.actions}>
-				<AuthButton provider={'credentials'} className={styles.actionButton} type='submit' variant='contained'>
+				<Button className={styles.actionButton}
+					type='submit'
+					variant='contained'>
 					<FormattedMessage id='reg_action_registration' ignoreTag={true} />
-				</AuthButton>
-				<AuthButton provider={'github'} className={styles.actionButton} type='submit' variant='contained'>
+				</Button>
+				<AuthButton
+					provider={'github'}
+					className={styles.actionButton}
+					type='Button'
+					variant='contained'>
 					GitHub
 				</AuthButton>
 			</div>
