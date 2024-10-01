@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
-export { default } from "next-auth/middleware"
+import {NextResponse} from 'next/server'
+import type {NextRequest} from 'next/server'
+export {default} from 'next-auth/middleware'
 export const config = {
 	// Указание путей для срабатывания мидлварины
 	matcher: ['/profile', '/api/theme/']
