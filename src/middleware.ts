@@ -1,7 +1,6 @@
 import {NextResponse} from 'next/server'
 import type {NextRequest} from 'next/server'
 
-
 export const config = {
 	// Указание путей для срабатывания мидлварины
 	matcher: ['/', '/api/theme/']
