@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
 	response.cookies.set({
 		name: 'theme',
 		value: theme,
-		httpOnly: false
+		httpOnly: true
 	})
 
 	return response
