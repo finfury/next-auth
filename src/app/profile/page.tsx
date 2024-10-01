@@ -1,11 +1,10 @@
 'use client'
 
-import { useSession } from 'next-auth/react'
+import {useSession} from 'next-auth/react'
 import Link from 'next/link'
 
-
 export default function Profile() {
-	const { data: session } = useSession()
+	const {data: session} = useSession()
 
 	if (session) {
 		return (
@@ -15,8 +14,10 @@ export default function Profile() {
 			</div>
 		)
 	}
-	return <div>
-		<p>Access Denied</p>
-		<Link href={'/'} >Вернуться на главную</Link>
-	</div>
+	return (
+		<div>
+			<p>Access Denied</p>
+			<Link href={'/'}>Вернуться на главную</Link>
+		</div>
+	)
 }
