@@ -1,15 +1,19 @@
 'use client'
 
-import {clsx} from 'clsx'
-import {useState} from 'react'
+import { clsx } from 'clsx'
+import { useState } from 'react'
 import Image from 'next/image'
 import LogoImg from '@/images/next.svg'
 import Button from '@mui/material/Button'
 import styles from './Header.module.scss'
 import Typography from '@mui/material/Typography/Typography'
+import { signOut, useSession } from 'next-auth/react'
+import Link from 'next/link'
 
 const Header = () => {
 	const [activeMenu, setActiveMenu] = useState<boolean>(false)
+	const session = useSession()
+
 
 	return (
 		<>
@@ -25,23 +29,23 @@ const Header = () => {
 									<Typography
 										component={'a'}
 										variant='h6'
-										href='dddd'
+										href='/'
 										className={styles.navigation__link}
 										onClick={() => setActiveMenu(false)}>
 										Главная
 									</Typography>
 								</li>
-								<li className={styles.navigation__item}>
+								{session?.data && <li className={styles.navigation__item}>
 									<Typography
 										component={'a'}
 										variant='h6'
-										href='dddd'
+										href='/profile'
 										className={styles.navigation__link}
 										onClick={() => setActiveMenu(false)}>
-										Запасная
+										Профиль
 									</Typography>
-								</li>
-								<li className={styles.navigation__item}>
+								</li>}
+								{!session?.data && <li className={styles.navigation__item}>
 									<Typography
 										component={'a'}
 										variant='h6'
@@ -50,14 +54,15 @@ const Header = () => {
 										onClick={() => setActiveMenu(false)}>
 										Авторизация
 									</Typography>
-								</li>
+								</li>}
 							</ul>
-							<Button
+							{session?.data && <Button
 								variant={'contained'}
 								size={'large'}
-								className={styles.headerButton}>
-								Связаться с нами
-							</Button>
+								className={styles.headerButton}
+								onClick={() => signOut({ callbackUrl: '/' })}>
+								Выйти
+							</Button>}
 						</nav>
 						<div
 							onClick={() => setActiveMenu(!activeMenu)}

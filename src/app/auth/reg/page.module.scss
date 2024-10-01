@@ -37,8 +37,8 @@
 
 .actions {
 	display: flex;
-	justify-content: center;
-	grid-gap: 25px;
+	flex-direction: column;
+	grid-gap: 10px;
 	margin-bottom: 10px;
 }
 
