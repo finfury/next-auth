@@ -1,16 +1,12 @@
-import NextAuth, { AuthOptions } from "next-auth"
-
+import NextAuth, {AuthOptions} from 'next-auth'
 
 export const authOptions = {
-  // Configure one or more authentication providers
-  providers: [],
-  basePath: '/api/auth'
+	// Configure one or more authentication providers
+	providers: [],
+	basePath: '/api/auth'
 }
 
-export const {handlers, user, } =  NextAuth(authOptions)
-
-
-
+export const {handlers, user} = NextAuth(authOptions)
 
 /* import NextAuth, { AuthOptions } from "next-auth"
 import { JWT } from 'next-auth/jwt'
