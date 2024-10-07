@@ -16,22 +16,21 @@ export interface IThemeProviderProps {
 
 export const ThemeContext = createContext<IThemeContext>({
 	theme: 'light',
-	setTheme() { }
+	setTheme() {}
 })
-
 
 export const ThemeProvider = ({children}: IThemeProviderProps) => {
 	const [theme, setTheme] = useState<Theme>('light')
 
 	const themeMUI = createTheme({
 		palette: {
-			mode: theme,
+			mode: theme
 		}
 	})
 
-	return <ThemeContext.Provider value={{theme, setTheme}}>
-		<ThemeMUIProvider theme={themeMUI}>
-			{children}
-		</ThemeMUIProvider>
-	</ThemeContext.Provider>
+	return (
+		<ThemeContext.Provider value={{theme, setTheme}}>
+			<ThemeMUIProvider theme={themeMUI}>{children}</ThemeMUIProvider>
+		</ThemeContext.Provider>
+	)
 }

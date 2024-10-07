@@ -16,7 +16,7 @@ export interface I18nProviderProps {
 
 export const I18nContext = createContext<I18nContext>({
 	language: 'ru',
-	setLanguage() { }
+	setLanguage() {}
 })
 
 export const I18nProvider = ({children}: I18nProviderProps) => {
@@ -44,7 +44,7 @@ export const I18nProvider = ({children}: I18nProviderProps) => {
 	}, [])
 
 	const isLanguage = (language: string): language is Language => {
-		return language === "en" || language === "ru"
+		return language === 'en' || language === 'ru'
 	}
 
 	return <I18nContext.Provider value={{language, setLanguage}}>{children}</I18nContext.Provider>

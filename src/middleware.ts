@@ -23,8 +23,9 @@ export function middleware(request: NextRequest) {
 
 		// Получаем предпочитаемый язык
 		const preferredLanguages = request.headers.get('accept-language')
-		const language = preferredLanguages?.split(',')[0]?.trim().toLowerCase().split('-')[0] ?? 'ru'
-		
+		const language =
+			preferredLanguages?.split(',')[0]?.trim().toLowerCase().split('-')[0] ?? 'ru'
+
 		// Cохраняем в куки
 		response.cookies.set({
 			name: cookieName,
