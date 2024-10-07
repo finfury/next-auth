@@ -1,9 +1,9 @@
-import Header from '@/components/Header/Header'
+import {t} from '@relocale/i18n'
 
 export default function Home() {
 	return (
 		<div>
-			<Header />
+			<h2>{t('hi')}</h2>
 		</div>
 	)
 }

@@ -1,27 +1,30 @@
-'use client'
-
-import {useState} from 'react'
+import {changeLang, getLang, init} from '@relocale/i18n'
 import {Providers} from './providers'
-import {getMessagesByLocale} from '@/utils/contexts/i18n/helpers/getMessagesByLocale'
-import {Theme} from '@/utils/contexts/theme/ThemeProvider'
-import {Locale} from '@/utils/contexts/i18n/I18nProvider'
-import '@/styles/common.scss'
+import {cookies} from 'next/headers'
+import {onMissingKey, resources} from '@/utils/contexts/i18n/I18n'
+import '@/styles/common.css'
+
+init({lang: 'ru', resources, onMissingKey})
 
 export default function RootLayout({children}: Readonly<{children: React.ReactNode}>) {
-	const [locale, setLocale] = useState<Locale>('ru')
-	const [theme, setTheme] = useState<Theme>('light')
-	const messages = getMessagesByLocale(locale)
+	const lang = getLang()
+
+	const allCookies = cookies()
+	const cookieLang = allCookies.get('lang')?.value ?? 'ru'
+
+	if (lang !== cookieLang) {
+		console.log('Not equal lang')
+		changeLang(cookieLang)
+	}
 
 	return (
-		<html lang='ru'>
+		<html lang={lang}>
 			<head>
 				<title>Next App</title>
 				<link rel='icon' href={'/images/favicon.ico'} type={'favicon'} />
 			</head>
-			<body data-theme={theme}>
-				<Providers i18n={{locale, messages, setLocale}} theme={{theme, setTheme}}>
-					{children}
-				</Providers>
+			<body>
+				<Providers theme={{theme: 'light'}}>{children}</Providers>
 			</body>
 		</html>
 	)

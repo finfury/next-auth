@@ -4,7 +4,7 @@ export type Theme = 'light' | 'dark'
 
 interface ThemeContext {
 	theme: Theme
-	setTheme: (theme: Theme) => void
+	setTheme?: (theme: Theme) => void
 }
 
 export interface IThemeProviderProps extends ThemeContext {

@@ -1,7 +1,6 @@
-@import 'null';
-@import 'colors';
-@import 'variables';
-@import 'fonts';
+@import url('null.css');
+@import url('colors.css');
+@import url('fonts.css');
 
 *::selection {
 	background-color: var(--black); /* Цвет фона */
@@ -33,7 +32,6 @@ body {
 
 	::-webkit-scrollbar-thumb {
 		background: var(--white); /* Цвет бегунка */
-		//border-radius: 10px; /* Закругленные углы бегунка */
 	}
 
 	@media (prefers-color-scheme: dark) {
@@ -49,11 +47,11 @@ body {
 
 .container {
 	display: block;
-	max-width: $max-width + px;
+	max-width: 1400px;
 	margin: 0 auto;
 	padding: 0 40px;
 
-	@media (max-width: $three + 'px') {
+	@media (max-width: 768px) {
 		padding: 0 20px;
 	}
 }
