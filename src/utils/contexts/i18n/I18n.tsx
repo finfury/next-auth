@@ -1,6 +1,6 @@
 export type Language = keyof typeof resources
-export const lang: Language = 'en'
-export const resources: Record<string, Record<string, string>> = {
+
+export const resources = {
 	en: {
 		hi: 'Hi, me',
 		title: 'Title',
@@ -37,7 +37,7 @@ export const onMissingKey = (missingKey: string | TemplateStringsArray) => {
 	console.log(`Not found a key for i18n: ${missingKey}`)
 }
 
-export function getDictionary(language: string) {
+export function getDictionary(language: Language) {
 	if (language in resources) return resources[language]
 	return resources['ru']
 }

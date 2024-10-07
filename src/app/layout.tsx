@@ -7,7 +7,7 @@ import '@/styles/common.css'
 init({lang: 'ru', resources, onMissingKey})
 
 export default function RootLayout({children}: Readonly<{children: React.ReactNode}>) {
-	const lang = getLang()
+	const lang = getLang() ?? 'ru'
 
 	const allCookies = cookies()
 	const cookieLang = allCookies.get('lang')?.value ?? 'ru'
@@ -24,7 +24,7 @@ export default function RootLayout({children}: Readonly<{children: React.ReactNo
 				<link rel='icon' href={'/images/favicon.ico'} type={'favicon'} />
 			</head>
 			<body>
-				<Providers theme={{theme: 'light'}}>{children}</Providers>
+				<Providers>{children}</Providers>
 			</body>
 		</html>
 	)

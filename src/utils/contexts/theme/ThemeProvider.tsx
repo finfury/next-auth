@@ -1,18 +1,29 @@
-import {createContext} from 'react'
+'use client'
+
+
+import {createContext, useState} from 'react'
+
 
 export type Theme = 'light' | 'dark'
 
-interface ThemeContext {
+interface IThemeContext {
 	theme: Theme
-	setTheme?: (theme: Theme) => void
+	setTheme: (theme: Theme) => void
 }
 
-export interface IThemeProviderProps extends ThemeContext {
+export interface IThemeProviderProps {
 	children: React.ReactNode
 }
 
-export const ThemeContext = createContext<ThemeContext>({theme: 'light', setTheme() {}})
+export const ThemeContext = createContext<IThemeContext>({
+	theme: 'light',
+	setTheme() {}
+})
 
-export const ThemeProvider = ({theme, setTheme, ...props}: IThemeProviderProps) => (
-	<ThemeContext.Provider value={{theme, setTheme}} {...props} />
-)
+export const ThemeProvider = ({children}: IThemeProviderProps) => {
+	const [theme, setTheme] = useState<Theme>('light')
+
+	return <ThemeContext.Provider value={{theme, setTheme}}>
+		{children}
+	</ThemeContext.Provider>
+}
