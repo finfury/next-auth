@@ -4,23 +4,23 @@ import {cookies} from 'next/headers'
 import {onMissingKey, resources} from '@/utils/contexts/i18n/I18n'
 import '@/styles/common.css'
 
-init({lang: 'ru', resources, onMissingKey})
 
 export default function RootLayout({children}: Readonly<{children: React.ReactNode}>) {
+	/* Изменяем язык на предпочитаемый */
 	const lang = getLang() ?? 'ru'
 
-	const allCookies = cookies()
+	/* const allCookies = cookies()
 	const cookieLang = allCookies.get('lang')?.value ?? 'ru'
 
 	if (lang !== cookieLang) {
-		console.log('Not equal lang')
+		console.log('Язык на клиенте и сервере отличаются')
 		changeLang(cookieLang)
-	}
+	} */
 
 	return (
 		<html lang={lang}>
 			<head>
-				<title>Next App</title>
+				<title>Next Auth</title>
 				<link rel='icon' href={'/images/favicon.ico'} type={'favicon'} />
 			</head>
 			<body>

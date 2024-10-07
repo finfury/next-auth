@@ -17,18 +17,19 @@ export function middleware(request: NextRequest) {
 		const cookieName = 'lang'
 		const response = NextResponse.next()
 		const currentLanguage = request.cookies.get(cookieName)
-		//if (currentLanguage) return response
+
+		// Язык уже был выбран
+		if (currentLanguage) return response
 
 		// Получаем предпочитаемый язык
 		const preferredLanguages = request.headers.get('accept-language')
-		const language =
-			preferredLanguages?.split(',')[0]?.trim().toLowerCase().split('-')[0] ?? 'ru'
-		//const language = 'en'
+		const language = preferredLanguages?.split(',')[0]?.trim().toLowerCase().split('-')[0] ?? 'ru'
+		
 		// Cохраняем в куки
 		response.cookies.set({
 			name: cookieName,
 			value: language,
-			httpOnly: true
+			httpOnly: false
 		})
 
 		return response
