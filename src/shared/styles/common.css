@@ -1,15 +1,7 @@
 @import url('null.css');
-@import url('colors.css');
 @import url('fonts.css');
 
-*::selection {
-	background-color: var(--black); /* Цвет фона */
-	color: var(--white); /* Цвет текста */
-}
-
 body {
-	/* background-color: var(--white);
-	color: var(--black); */
 	font-family: 'Rubic', sans-serif;
 
 	scrollbar-width: auto; /* Ширина полосы прокрутки */

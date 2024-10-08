@@ -1,6 +1,5 @@
 import {NextRequest, NextResponse} from 'next/server'
 
-
 interface IRequest {
 	theme: string
 }
@@ -26,7 +25,7 @@ export async function POST(request: NextRequest) {
 	response.cookies.set({
 		name: 'theme',
 		value: theme,
-		httpOnly: true
+		httpOnly: false
 	})
 
 	return response

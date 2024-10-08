@@ -1,6 +1,5 @@
 import {Language} from '../contexts/i18n/I18n'
 
-
 interface IRequest {
 	language: string
 }

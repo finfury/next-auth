@@ -7,12 +7,17 @@ export const resources = {
 			pages: {
 				section_1: 'Products',
 				section_2: 'Price',
-				section_3: 'Contacts',
+				section_3: 'Contacts'
 			},
 			settings: {
-				account_action_1: 'Profile',
-				account_action_2: 'Exit',
-			},
+				account_action_2: 'Exit'
+			}
+		},
+		login: {
+			title: 'Sign in in the account',
+			label_email: 'Email',
+			label_password: 'Password',
+			signin: 'Sign In',
 		},
 		hi: 'Hi, me',
 		title: 'Title',
@@ -34,12 +39,17 @@ export const resources = {
 			pages: {
 				section_1: 'Продукты',
 				section_2: 'Цены',
-				section_3: 'Контакты',
+				section_3: 'Контакты'
 			},
 			settings: {
-				account_action_1: 'Профиль',
-				account_action_2: 'Выйти',
-			},
+				account_action_2: 'Выйти'
+			}
+		},
+		login: {
+			title: 'Войти в аккаунт',
+			label_email: 'Почта',
+			label_password: 'Пароль',
+			signin: 'Войти',
 		},
 		hi: 'Привет, Me',
 		title: 'Заголовок',

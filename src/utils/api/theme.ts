@@ -1,7 +1,6 @@
 import {Language} from '../contexts/i18n/I18n'
 import {Theme} from '../contexts/theme/ThemeProvider'
 
-
 interface IRequest {
 	theme: Theme
 }
