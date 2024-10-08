@@ -1,10 +1,19 @@
-import {IThemeRequest, IThemeResponse} from '@/app/models/Theme'
 import {NextRequest, NextResponse} from 'next/server'
 
-export async function POST(request: NextRequest) {
-	const {theme}: IThemeRequest = await request.json()
 
-	const body: IThemeResponse = {
+interface IRequest {
+	theme: string
+}
+
+interface IResponse {
+	success: boolean
+	theme: string
+}
+
+export async function POST(request: NextRequest) {
+	const {theme}: IRequest = await request.json()
+
+	const body: IResponse = {
 		success: true,
 		theme
 	}

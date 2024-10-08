@@ -6,7 +6,7 @@ import {changeLang, init} from '@relocale/i18n'
 import {getCookie} from './helpers/getClientCookie'
 
 interface I18nContext {
-	language: string
+	language: Language
 	setLanguage: (language: Language) => void
 }
 

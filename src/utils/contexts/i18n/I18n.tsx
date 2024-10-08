@@ -2,6 +2,18 @@ export type Language = keyof typeof resources
 
 export const resources = {
 	en: {
+		header: {
+			logo_text: 'Main',
+			pages: {
+				section_1: 'Products',
+				section_2: 'Price',
+				section_3: 'Contacts',
+			},
+			settings: {
+				account_action_1: 'Profile',
+				account_action_2: 'Exit',
+			},
+		},
 		hi: 'Hi, me',
 		title: 'Title',
 		reg_title: 'Rigistration',
@@ -17,6 +29,18 @@ export const resources = {
 		button_locale_switch: 'Русский'
 	},
 	ru: {
+		header: {
+			logo_text: 'Главная',
+			pages: {
+				section_1: 'Продукты',
+				section_2: 'Цены',
+				section_3: 'Контакты',
+			},
+			settings: {
+				account_action_1: 'Профиль',
+				account_action_2: 'Выйти',
+			},
+		},
 		hi: 'Привет, Me',
 		title: 'Заголовок',
 		reg_title: 'Регистрация',

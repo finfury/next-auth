@@ -1,9 +1,18 @@
 import {NextRequest, NextResponse} from 'next/server'
 
-export async function POST(request: NextRequest) {
-	const {language}: {language: string} = await request.json()
+interface IRequest {
+	language: string
+}
 
-	const body = {
+interface IResponse {
+	success: boolean
+	language: string
+}
+
+export async function POST(request: NextRequest): Promise<NextResponse<IResponse>> {
+	const {language}: IRequest = await request.json()
+
+	const body: IResponse = {
 		success: true,
 		language
 	}

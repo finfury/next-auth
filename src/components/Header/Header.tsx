@@ -1,85 +1,172 @@
 'use client'
 
-import {clsx} from 'clsx'
-import {useState} from 'react'
-import Image from 'next/image'
-import LogoImg from '@/images/next.svg'
-import Button from '@mui/material/Button'
-import styles from './Header.module.scss'
-import Typography from '@mui/material/Typography/Typography'
-import {signOut, useSession} from 'next-auth/react'
 
-const Header = () => {
-	const [activeMenu, setActiveMenu] = useState<boolean>(false)
-	const session = useSession()
+import * as React from 'react'
+import AppBar from '@mui/material/AppBar'
+import Box from '@mui/material/Box'
+import Toolbar from '@mui/material/Toolbar'
+import IconButton from '@mui/material/IconButton'
+import Typography from '@mui/material/Typography'
+import Menu from '@mui/material/Menu'
+import MenuIcon from '@mui/icons-material/Menu'
+import Container from '@mui/material/Container'
+import Avatar from '@mui/material/Avatar'
+import Button from '@mui/material/Button'
+import Tooltip from '@mui/material/Tooltip'
+import MenuItem from '@mui/material/MenuItem'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import TranslateIcon from '@mui/icons-material/Translate'
+import DarkModeIcon from '@mui/icons-material/DarkMode'
+import LightModeIcon from '@mui/icons-material/LightMode';
+import {getDictionary, Language} from '@/utils/contexts/i18n/I18n'
+import {t} from '@relocale/i18n'
+import {I18nContext} from '@/utils/contexts/i18n/I18nProvider'
+import {changeLanguage} from '@/utils/api/language'
+import {changeTheme} from '@/utils/api/theme'
+import {Theme, ThemeContext} from '@/utils/contexts/theme/ThemeProvider'
+
+
+function Header() {
+	const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
+	const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null)
+
+	const {language, setLanguage} = React.useContext(I18nContext)
+	const {theme, setTheme} = React.useContext(ThemeContext)
+
+	const dictionary = getDictionary(language)
+	const pages = dictionary.header.pages
+	const settings = dictionary.header.settings
+
+	const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+		setAnchorElNav(event.currentTarget)
+	}
+	const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+		setAnchorElUser(event.currentTarget)
+	}
+
+	const handleCloseNavMenu = () => {
+		setAnchorElNav(null)
+	}
+
+	const handleCloseUserMenu = () => {
+		setAnchorElUser(null)
+	}
+
+	const handleChangeTheme = async () => {
+		let newTheme: Theme = 'light'
+		if (theme === 'dark') newTheme = 'light'
+		if (theme === 'light') newTheme = 'dark'
+
+		setTheme(newTheme)
+		changeTheme(newTheme)
+	}
+
+	const handleChangeLanguage = async () => {
+		let newLang: Language = 'ru'
+		if (language === 'ru') newLang = 'en'
+		if (language === 'en') newLang = 'ru'
+
+		setLanguage(newLang)
+		changeLanguage(newLang)
+	}
 
 	return (
-		<>
-			<header className={styles.header}>
-				<div className={'container'}>
-					<div className={styles.headerBody}>
-						<a href='' className={styles.headerLogo}>
-							<Image src={LogoImg} className={styles.headerLogoImg} alt={''} />
-						</a>
-						<nav className={clsx(styles.navigation, activeMenu && styles.active)}>
-							<ul className={styles.navigation__list}>
-								<li className={styles.navigation__item}>
-									<Typography
-										component={'a'}
-										variant='h6'
-										href='/'
-										className={styles.navigation__link}
-										onClick={() => setActiveMenu(false)}>
-										Главная
-									</Typography>
-								</li>
-								{session?.data && (
-									<li className={styles.navigation__item}>
-										<Typography
-											component={'a'}
-											variant='h6'
-											href='/profile'
-											className={styles.navigation__link}
-											onClick={() => setActiveMenu(false)}>
-											Профиль
-										</Typography>
-									</li>
-								)}
-								{!session?.data && (
-									<li className={styles.navigation__item}>
-										<Typography
-											component={'a'}
-											variant='h6'
-											href='/auth/login'
-											className={styles.navigation__link}
-											onClick={() => setActiveMenu(false)}>
-											Авторизация
-										</Typography>
-									</li>
-								)}
-							</ul>
-							{session?.data && (
-								<Button
-									variant={'contained'}
-									size={'large'}
-									className={styles.headerButton}
-									onClick={() => signOut({callbackUrl: '/'})}>
-									Выйти
-								</Button>
-							)}
-						</nav>
-						<div
-							onClick={() => setActiveMenu(!activeMenu)}
-							className={clsx(styles.headerBurger, activeMenu && styles.active)}>
-							<span></span>
-							<span></span>
-							<span></span>
-						</div>
-					</div>
-				</div>
-			</header>
-		</>
+		<AppBar position="static">
+			<Container maxWidth="xl">
+				<Toolbar disableGutters>
+					<Avatar alt="logo" src="/images/favicon.ico" sx={{display: {xs: 'none', md: 'flex'}}} />
+					<Typography
+						variant="h6"
+						noWrap
+						component="a"
+						href="/"
+						sx={{mr: 2, ml: 2, fontWeight: 700, color: 'inherit', display: {xs: 'none', md: 'flex'}, }}>
+						{t(`header.logo_text`)}
+					</Typography>
+					<Box sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}}}>
+						<IconButton
+							size="large"
+							aria-label="account of current user"
+							aria-controls="menu-appbar"
+							aria-haspopup="true"
+							onClick={handleOpenNavMenu}
+							color="inherit"
+						>
+							<MenuIcon />
+						</IconButton>
+						<Menu
+							id="menu-appbar"
+							anchorEl={anchorElNav}
+							anchorOrigin={{
+								vertical: 'bottom',
+								horizontal: 'left',
+							}}
+							keepMounted
+							transformOrigin={{
+								vertical: 'top',
+								horizontal: 'left',
+							}}
+							open={Boolean(anchorElNav)}
+							onClose={handleCloseNavMenu}
+							sx={{display: {xs: 'block', md: 'none'}}}
+						>
+							{Object.keys(pages).map((page) => (
+								<MenuItem key={page} onClick={handleCloseNavMenu}>
+									<Typography sx={{textAlign: 'center'}}>{t(`header.pages.${page}`)}</Typography>
+								</MenuItem>
+							))}
+						</Menu>
+					</Box>
+					<Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex', justifyContent: 'center'}}}>
+						{Object.keys(pages).map((page) => (
+							<Button
+								key={page}
+								onClick={handleCloseNavMenu}
+								sx={{my: 2, mx: 3, color: 'white', display: 'block', fontWeight: 'medium', fontSize: 16}}>
+								{t(`header.pages.${page}`)}
+							</Button>
+						))}
+					</Box>
+					<Box sx={{flexGrow: 0}}>
+						<IconButton onClick={handleChangeTheme} size="large">
+							{theme === 'light' && <DarkModeIcon sx={{width: 30, height: 30, color: 'white'}} />}
+							{theme === 'dark' && <LightModeIcon sx={{width: 30, height: 30, color: 'white'}} />}
+						</IconButton>
+						<IconButton onClick={handleChangeLanguage} size="large">
+							<TranslateIcon sx={{width: 30, height: 30, color: 'white'}} />
+						</IconButton>
+						<Tooltip title="Действия с аккаунтом">
+							<IconButton onClick={handleOpenUserMenu} size="large">
+								{/* <Avatar alt="logo" src="/images/favicon.ico" sx={{display: {xs: 'none', md: 'flex'}}} /> */}
+								<AccountCircleIcon sx={{width: 40, height: 40, color: 'white'}} />
+							</IconButton>
+						</Tooltip>
+						<Menu
+							sx={{mt: '45px'}}
+							id="menu-appbar"
+							anchorEl={anchorElUser}
+							anchorOrigin={{
+								vertical: 'top',
+								horizontal: 'right',
+							}}
+							keepMounted
+							transformOrigin={{
+								vertical: 'top',
+								horizontal: 'right',
+							}}
+							open={Boolean(anchorElUser)}
+							onClose={handleCloseUserMenu}
+						>
+							{Object.keys(settings).map((setting) => (
+								<MenuItem key={setting} onClick={handleCloseUserMenu}>
+									<Typography sx={{textAlign: 'center'}}>{t(`header.settings.${setting}`)}</Typography>
+								</MenuItem>
+							))}
+						</Menu>
+					</Box>
+				</Toolbar>
+			</Container>
+		</AppBar>
 	)
 }
-
 export default Header
